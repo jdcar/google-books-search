@@ -6,7 +6,7 @@ const Jumbo = () => {
     return (
         <Jumbotron fluid>
             <Container>
-                <h1>React Google Books Search</h1>
+                <h1 style={{textAlign:"center"}}>React Google Books Search</h1>
             </Container>
         </Jumbotron>
     )

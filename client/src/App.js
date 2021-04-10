@@ -11,7 +11,6 @@ import Home from './pages/Home'
 function App() {
   return (
     <Router>
-
       <Switch>
         <Navbar />
          <Route path="/saved">
