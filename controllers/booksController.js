@@ -1,7 +1,7 @@
 const db = require('../models')
 
 module.exports = {
-  createBook: function(req, res) {
+  addBook: function(req, res) {
     db.Book.create(req.body)
       .then(bookData => {
         res.json(bookData)
@@ -24,17 +24,6 @@ module.exports = {
   getBook: function(req, res) {
     const { id } = req.params
     db.Book.findById(id)
-      .then(bookData => {
-        res.json(bookData)
-      })
-      .catch(err => {
-        console.log(err)
-        res.status(500).send()
-      })
-  },
-  updateBook: function(req, res) {
-    const { id } = req.params
-    db.Book.findByIdAndUpdate(id, req.body, { new: true })
       .then(bookData => {
         res.json(bookData)
       })

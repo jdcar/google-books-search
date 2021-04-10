@@ -5,14 +5,12 @@ import {
 } from "react-router-dom";
 import Saved from './pages/Saved'
 import Search from './pages/Search'
-import Navbar from './components/Navbar'
 import Home from './pages/Home'
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Navbar />
          <Route path="/saved">
           <Saved />
         </Route>
