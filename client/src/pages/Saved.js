@@ -9,14 +9,17 @@ const Saved = () => {
 
 
     useEffect(() => {
+        loadBooks()
+      }, [])
+    
+      // Loads all books and sets them to books
+      function loadBooks() {
         API.getBooks()
-            .then(response => {
-                console.log(response.data)
-                // setBooks(response.data)
-            }
-            )
-            .catch(err => console.log(err))
-    }, [])
+          .then(res => 
+            setBooks(res.data)
+          )
+          .catch(err => console.log(err));
+      };
 
 
 
