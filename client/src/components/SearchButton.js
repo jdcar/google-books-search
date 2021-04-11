@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 
-const SaveButton = () => {
+const SearchButton = () => {
     return (
         <>
           <Button as="input" type="submit" value="Search" />
@@ -10,4 +10,4 @@ const SaveButton = () => {
     )
 }
 
-export default SaveButton
+export default SearchButton

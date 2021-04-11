@@ -1,14 +1,26 @@
-import React from 'react'
-import Form from 'react-bootstrap/Form'
-import SearchButton from '../components/SearchButton'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
-const SearchBox = () => {
+
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
+
+const SearchBox = (props) => {
+
+    // const [books, setBooks] = useState()
+    
+
     return (
         <Form>
             <Form.Group>
-                <Form.Control size="lg" type="text" placeholder="Enter search terms here" />
+                <Form.Control size="lg" type="text" placeholder="Enter search terms here" 
+                onChange={event => setSearch(event.target.value)}
+                {...props}
+                />
                 <br></br>
-                <SearchButton />
+                <Button as="input" type="submit" value="Search"
+                onClick={handleSearchButton} />
             </Form.Group>
         </Form>
     )
