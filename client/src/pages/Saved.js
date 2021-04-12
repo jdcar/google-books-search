@@ -12,25 +12,31 @@ const Saved = () => {
 
     const [saved, setSaved] = useState([])
 
-    
 
     useEffect(() => {
         loadBooks()
-      }, [])
-    
-      // Loads all books and sets them to books
-      function loadBooks() {
+    }, [])
+
+    // Loads all books and sets them to books
+    function loadBooks() {
         API.getBooks()
-          .then(res => 
-            // console.log(res.data)
-            setSaved(res.data)            
-          )
-        //   .then(console.log(data))
-          .catch(err => console.log(err));
-      };
+            .then(res =>
+                // console.log(res.data)
+                setSaved(res.data)
+            )
+            //   .then(console.log(data))
+            .catch(err => console.log(err));
+    };
 
+    
+    function deleteBook(id) {
+        console.log(id)
+      API.deleteBook(id)
+        .then(res => loadBooks())
+        .catch(err => console.log(err));
+    }
 
-      console.log(saved)
+    console.log(saved)
     return (
         <div>
             <Navbar />
@@ -40,31 +46,31 @@ const Saved = () => {
                         {saved.map(book => {
                             return (
                                 <Card>
-                                <Card.Header as="h5">{book.title}</Card.Header>
-                                <Card.Body>
-                                    <Row>
-                                        <Col>
-                                            <Card.Title>{book.title}</Card.Title>
-                                            <Card.Text>
-                                                <div>
-                                                    <p>{book.subtitle}</p>
-                                                    <p>{book.authors}</p>
-                                                    {/* <p>{book.summary}</p> */}
-                                                </div>
-                                            </Card.Text>
-                                        </Col>
-                                        <Col sm={2}>
-                                            <Button href={book.link} variant="link">View</Button>{' '}
-                                            <Button variant="primary">Delete</Button>
-                                        </Col>
-                                    </Row>
-                                </Card.Body>
-                            </Card>
+                                    <Card.Header key={book._id} as="h5">{book.title}</Card.Header>
+                                    <Card.Body>
+                                        <Row>
+                                            <Col>
+                                                {/* <Card.Title>{book.title}</Card.Title> */}
+                                                <Card.Text>
+                                                    <div>
+                                                        <p>{book.subtitle}</p>
+                                                        <p>{book.author}</p>
+                                                        {/* <p>{book.summary}</p> */}
+                                                    </div>
+                                                </Card.Text>
+                                            </Col>
+                                            <Col sm={2}>
+                                                <Button href={book.link} variant="link">View</Button>{' '}
+                                                <Button onClick={() => deleteBook(book._id)} variant="primary">Delete</Button>
+                                            </Col>
+                                        </Row>
+                                    </Card.Body>
+                                </Card>
                             )
 
                         })}
                     </div>
-                    
+
                 ) : (
                     <h3>No Books to Display</h3>
                 )}
