@@ -1,16 +1,16 @@
 const db = require('../models')
 
 module.exports = {
-  // addBook: function(req, res) {
-  //   db.Book.create(req.body)
-  //     .then(bookData => {
-  //       res.json(bookData)
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //       res.status(500).send()
-  //     })
-  // },
+  addBook: function(req, res) {
+    db.Book.create(req.body)
+      .then(bookData => {
+        res.json(bookData)
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(500).send()
+      })
+  },
   getBooks: function(req, res) {
     db.Book.find({})
       .then(books => {

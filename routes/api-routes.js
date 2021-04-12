@@ -8,6 +8,6 @@ const booksController = require('../controllers/booksController')
 
 router.route('/api/books')
   .get(booksController.getBooks)
-  // .post(booksController.addBook)
+  .post(booksController.addBook)
 
 module.exports = router

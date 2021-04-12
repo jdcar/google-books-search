@@ -17,6 +17,13 @@ const Search = () => {
 
     const [books, setBooks] = useState("")
 
+    const [save, setSave] = useState({
+        title: "",
+        subtitle: "",
+        author: "",
+        link: ""
+    })
+
     function handleSearchButton(event) {
         event.preventDefault()
         console.log("Click")
@@ -33,6 +40,32 @@ const Search = () => {
             })
         // .then(setData(res))
     }
+
+    function handleSaveBook(event) {
+        event.preventDefault()
+        // console.log(event.target.value)
+        setSave({
+            title:event.target.parentNode.parentNode.parentNode.parentNode.children[0].innerHTML,
+            subtitle: event.target.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[0].innerHTML,
+            author: event.target.parentNode.parentNode.parentNode.children[0].children[0].children[1].children[0].children[0].innerHTML,
+            link: event.target.parentNode.parentNode.parentNode.children[0].children[0].children[1].children[0].children[1].innerHTML
+        })
+        console.log(event.target.parentNode.parentNode.parentNode.children[0].children[0].children[1].children[0].children[1].innerHTML)
+        saveBook()
+        console.log(save)
+    }
+
+    function saveBook() {
+        axios.post('/api/books', save)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+
+    // console.log(books)
 
     return (
         <>
@@ -53,23 +86,32 @@ const Search = () => {
                     <div>
                         {books.map(book => {
                             return (
-                                <Card>
-                                <Card.Header as="h5">Featured</Card.Header>
+                                <Card key={book.id}>
+                                <Card.Header as="h5" 
+                                title={book.volumeInfo.title} 
+                                value={book.volumeInfo.title} 
+                                className="title">{book.volumeInfo.title}</Card.Header>
                                 <Card.Body>
                                     <Row>
                                         <Col>
-                                            <Card.Title>{book.volumeInfo.title}</Card.Title>
+                                        <div>
+                                            <Card.Title>{book.volumeInfo.subtitle}</Card.Title>
+
+                                        </div>
                                             <Card.Text>
                                                 <div>
-                                                    <p>{book.volumeInfo.subtitle}</p>
                                                     <p>{book.volumeInfo.authors[0]}</p>
-                                                    <p>{book.searchInfo.textSnippet}</p>
+                                                    {/* <p>{book.searchInfo.textSnippet}</p> */}
+                                                    <p style={{display:'none'}}>{book.volumeInfo.previewLink}</p>
                                                 </div>
                                             </Card.Text>
                                         </Col>
                                         <Col sm={2}>
                                             <Button href={book.volumeInfo.previewLink} variant="link">View</Button>{' '}
-                                            <Button variant="primary">Save</Button>
+                                            <Button 
+                                            variant="primary"
+                                            onClick={handleSaveBook} 
+                                            >Save</Button>
                                         </Col>
                                     </Row>
                                 </Card.Body>
@@ -83,31 +125,6 @@ const Search = () => {
                     <h3>No Books to Display</h3>
                 )}
 
-
-
-
-
-                {/* <Card>
-                    <Card.Header as="h5">Featured</Card.Header>
-                    <Card.Body>
-                        <Row>
-                            <Col>
-                                <Card.Title>Title</Card.Title>
-                                <Card.Text>
-                                    <div>
-                                        <p>subtitle</p>
-                                        <p>author</p>
-                                        <p>summary</p>
-                                    </div>
-                                </Card.Text>
-                            </Col>
-                            <Col sm={2}>
-                                <Button variant="primary">View</Button>{' '}
-                                <Button variant="primary">Save</Button>
-                            </Col>
-                        </Row>
-                    </Card.Body>
-                </Card> */}
             </Container>
         </>
     )

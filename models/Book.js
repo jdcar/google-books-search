@@ -13,6 +13,7 @@ const bookSchema = new Schema({
         type: Date,
         default: Date.now()
     },
+    link: String
 })
 
 const Book = mongoose.model('Book', bookSchema)
