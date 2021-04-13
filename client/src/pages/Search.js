@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -17,19 +17,18 @@ const Search = () => {
 
     const [books, setBooks] = useState("")
 
-    const [save, setSave] = useState({
-        title: "",
-        subtitle: "",
-        author: "",
-        link: "",
-        image: ""
-    })
+    const [save, setSave] = useState()
 
     function handleSearchButton(event) {
         event.preventDefault()
         console.log("Click")
         bookSearch()
     }
+
+    useEffect(() => {
+        
+      }, [save])
+    
 
     function bookSearch() {
 
@@ -128,7 +127,7 @@ const Search = () => {
                                             <Col sm={2}>
                                                 <Button href={book.volumeInfo.previewLink} variant="link">View</Button>{' '}
                                                 <Button
-                                                    variant="primary"
+                                                    // variant="primary"
                                                     onClick={handleSaveBook}
                                                 >Save</Button>
                                             </Col>
