@@ -26,6 +26,10 @@ const bookSchema = new Schema({
         type: Date,
         default: Date.now()
     },
+    image: {
+        type: String,
+        required: false
+    },
 })
 
 const Book = mongoose.model('Book', bookSchema)

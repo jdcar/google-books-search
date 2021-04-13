@@ -45,11 +45,11 @@ const Saved = () => {
                     <div>
                         {saved.map(book => {
                             return (
-                                <Card>
-                                    <Card.Header key={book._id} as="h5">{book.title}</Card.Header>
+                                <Card key={book._id} >
+                                    <Card.Header as="h5">{book.title}</Card.Header>
                                     <Card.Body>
                                         <Row>
-                                            <Col>
+                                            <Col sm={8}>
                                                 {/* <Card.Title>{book.title}</Card.Title> */}
                                                 <Card.Text>
                                                     {book.subtitle}
@@ -61,6 +61,9 @@ const Saved = () => {
                                                     {book.description}
                                                 </Card.Text>
                                         
+                                            </Col>
+                                            <Col>
+                                                <img src={book.image} alt={book.title}  />
                                             </Col>
                                         <Col sm={2}>
                                             <Button href={book.link} variant="link">View</Button>{' '}
