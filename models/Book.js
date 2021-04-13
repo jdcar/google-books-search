@@ -4,16 +4,28 @@ const Schema = mongoose.Schema
 const bookSchema = new Schema({
     title: {
         type: String,
-        required: 'A title is required'
+        required: false
     },
-    subtitle: String,
-    author: String,
-    summary: String,
+    subtitle: {
+        type: String,
+        required: false
+    },
+    author: {
+        type: String,
+        required: false
+    },
+    description: {
+        type: String,
+        required: false
+    },
+    link: {
+        type: String,
+        required: false
+    },
     date: {
         type: Date,
         default: Date.now()
     },
-    link: String
 })
 
 const Book = mongoose.model('Book', bookSchema)

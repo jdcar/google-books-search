@@ -28,12 +28,12 @@ const Saved = () => {
             .catch(err => console.log(err));
     };
 
-    
+
     function deleteBook(id) {
         console.log(id)
-      API.deleteBook(id)
-        .then(res => loadBooks())
-        .catch(err => console.log(err));
+        API.deleteBook(id)
+            .then(res => loadBooks())
+            .catch(err => console.log(err));
     }
 
     console.log(saved)
@@ -52,31 +52,34 @@ const Saved = () => {
                                             <Col>
                                                 {/* <Card.Title>{book.title}</Card.Title> */}
                                                 <Card.Text>
-                                                    <div>
-                                                        <p>{book.subtitle}</p>
-                                                        <p>{book.author}</p>
-                                                        {/* <p>{book.summary}</p> */}
-                                                    </div>
+                                                    {book.subtitle}
                                                 </Card.Text>
+                                                <Card.Text>
+                                                    {book.author}
+                                                </Card.Text>
+                                                <Card.Text>
+                                                    {book.description}
+                                                </Card.Text>
+                                        
                                             </Col>
-                                            <Col sm={2}>
-                                                <Button href={book.link} variant="link">View</Button>{' '}
-                                                <Button onClick={() => deleteBook(book._id)} variant="primary">Delete</Button>
-                                            </Col>
+                                        <Col sm={2}>
+                                            <Button href={book.link} variant="link">View</Button>{' '}
+                                            <Button onClick={() => deleteBook(book._id)} variant="primary">Delete</Button>
+                                        </Col>
                                         </Row>
                                     </Card.Body>
                                 </Card>
-                            )
+                )
 
                         })}
                     </div>
 
                 ) : (
-                    <h3>No Books to Display</h3>
+            <h3>No Books to Display</h3>
                 )}
 
             </Container>
-        </div>
+        </div >
     )
 }
 export default Saved

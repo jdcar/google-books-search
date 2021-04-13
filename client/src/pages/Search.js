@@ -36,23 +36,31 @@ const Search = () => {
             .then(res => {
                 
                 setBooks(res.data.items)
-                console.log(books)
+                console.log(res.data.items)
             })
         // .then(setData(res))
     }
 
     function handleSaveBook(event) {
         event.preventDefault()
-        // console.log(event.target.value)
+
+        const title = event.target.parentNode.parentNode.parentNode.parentNode.children[0].innerHTML
+        const subtitle = event.target.parentNode.parentNode.children[0].children[0].innerHTML
+        const author = event.target.parentNode.parentNode.children[0].children[1].innerHTML
+        const description = event.target.parentNode.parentNode.children[0].children[2].innerHTML
+        const link = event.target.parentNode.parentNode.children[0].children[2].innerHTML
+        console.log(title)
         setSave({
-            title:event.target.parentNode.parentNode.parentNode.parentNode.children[0].innerHTML,
-            subtitle: event.target.parentNode.parentNode.parentNode.children[0].children[0].children[0].children[0].innerHTML,
-            author: event.target.parentNode.parentNode.parentNode.children[0].children[0].children[1].children[0].children[0].innerHTML,
-            link: event.target.parentNode.parentNode.parentNode.children[0].children[0].children[1].children[0].children[1].innerHTML
+            title: title,
+            subtitle: subtitle,
+            author: author,
+            description: description,
+            link: link
         })
-        console.log(event.target.parentNode.parentNode.parentNode.children[0].children[0].children[1].children[0].children[1].innerHTML)
-        saveBook()
+        // console.log(event.target.parentNode.parentNode.children[0].children[2].innerHTML)
         console.log(save)
+        saveBook()
+        
     }
 
     function saveBook() {
@@ -94,16 +102,16 @@ const Search = () => {
                                 <Card.Body>
                                     <Row>
                                         <Col>
-                                        <div>
                                             <Card.Title>{book.volumeInfo.subtitle}</Card.Title>
-
-                                        </div>
                                             <Card.Text>
-                                                <div>
-                                                    <p>{book.volumeInfo.authors[0]}</p>
-                                                    {/* <p>{book.searchInfo.textSnippet}</p> */}
-                                                    <p style={{display:'none'}}>{book.volumeInfo.previewLink}</p>
-                                                </div>
+                                                {book.volumeInfo.authors[0]}
+                                            </Card.Text>
+                                            <Card.Text>
+                                                {book.volumeInfo.description}
+                                            </Card.Text>    
+                                            <Card.Text style={{display:'none'}}>    
+                                                    {/* <p></p> */}
+                                                    {book.volumeInfo.previewLink}
                                             </Card.Text>
                                         </Col>
                                         <Col sm={2}>
